@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
+import { connectDB } from "./lib/db.js";
 
 dotenv.config();
 
@@ -31,4 +32,5 @@ if (process.env.NODE_ENV == "production") {
 }
 app.listen(PORT, () => {
   console.log(`server is running on ${PORT}`);
+  connectDB();
 });
