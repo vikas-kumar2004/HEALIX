@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
+import authRoutes from "../src/routes/auth.route.js"
 
 dotenv.config();
 
@@ -21,6 +22,12 @@ app.use(
 app.get("/health", (req, res) => {
   res.send("server is working");
 });
+
+// all routes handle from here
+app.use("/api/auth", authRoutes);
+
+
+
 // making our app ready deployment
 if (process.env.NODE_ENV == "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
