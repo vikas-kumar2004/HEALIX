@@ -2,7 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
-import authRoutes from "../src/routes/auth.route.js"
+import authRoutes from "../src/routes/auth.route.js";
+import { connectDB } from "./lib/db.js";
+
 
 dotenv.config();
 
@@ -26,8 +28,6 @@ app.get("/health", (req, res) => {
 // all routes handle from here
 app.use("/api/auth", authRoutes);
 
-
-
 // making our app ready deployment
 if (process.env.NODE_ENV == "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
@@ -38,4 +38,5 @@ if (process.env.NODE_ENV == "production") {
 }
 app.listen(PORT, () => {
   console.log(`server is running on ${PORT}`);
+  connectDB();
 });
