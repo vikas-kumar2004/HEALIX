@@ -5,8 +5,8 @@ const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-md fixed w-full top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4">
+    <nav className="bg-white shadow-md fixed h-16 w-full top-0 z-50">
+      <div className="mx-auto px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="text-2xl font-bold text-indigo-600">
