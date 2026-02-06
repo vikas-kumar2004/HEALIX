@@ -3,6 +3,7 @@ import numpy as np
 import librosa
 import joblib
 import os
+from librosa.util.exceptions import ParameterError
 
 def extract_mfcc(file_path, n_mfcc=13):
     audio, sr = librosa.load(file_path, sr=None)
@@ -34,15 +35,23 @@ model = joblib.load("model.pkl")
 scaler = joblib.load("scaler.pkl")
 
 
+
+
 try:
     features = extract_mfcc(audio_path)
-except Exception as e:
-    print("Error loading audio file.")
-    print("Please provide a valid .wav file.")
+
+except FileNotFoundError as e:
+    print(f"File not found: {e}")
     exit(1)
 
-features = features.reshape(1, -1)
-features = scaler.transform(features)
+except ParameterError as e:
+    print(f"Invalid audio file: {e}")
+    exit(1)
+
+except ValueError as e:
+    print(f"Value error while processing audio: {e}")
+    exit(1)
+
 
 # Predict
 pred = model.predict(features)
