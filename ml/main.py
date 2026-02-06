@@ -2,6 +2,7 @@ import sys
 import numpy as np
 import librosa
 import joblib
+import os
 
 def extract_mfcc(file_path, n_mfcc=13):
     audio, sr = librosa.load(file_path, sr=None)
@@ -15,6 +16,11 @@ if len(sys.argv) < 2:
 audio_path = sys.argv[1]
 
 # Load trained model + scaler
+if not os.path.exists("model.pkl") or not os.path.exists("scaler.pkl"):
+    print("Error: model.pkl or scaler.pkl not found.")
+    print("Please run the training notebook first to generate these files.")
+    exit(1)
+
 model = joblib.load("model.pkl")
 scaler = joblib.load("scaler.pkl")
 
