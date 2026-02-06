@@ -24,8 +24,14 @@ if not os.path.exists("model.pkl") or not os.path.exists("scaler.pkl"):
 model = joblib.load("model.pkl")
 scaler = joblib.load("scaler.pkl")
 
-# Extract features
-features = extract_mfcc(audio_path)
+
+try:
+    features = extract_mfcc(audio_path)
+except Exception as e:
+    print("Error loading audio file.")
+    print("Please provide a valid .wav file.")
+    exit(1)
+
 features = features.reshape(1, -1)
 features = scaler.transform(features)
 
