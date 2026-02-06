@@ -82,8 +82,6 @@ Each folder should contain `.wav` files.
 ```bash
 pip install -r requirements.txt
 
-2. Open:
-notebooks/voice-processing.ipynb and run the cells in the order.
 
 ```
 Run the notebook to generate model.pkl and scaler.pkl
