@@ -54,15 +54,13 @@ const NavBar = () => {
           <Link to="/" onClick={() => setMenuOpen(false)}>
             Home
           </Link>
-          <Link to="/about" onClick={() => setMenuOpen(false)}>
-            About
+          <Link to="/signup" onClick={() => setMenuOpen(false)}>
+            register
           </Link>
-          <Link to="/projects" onClick={() => setMenuOpen(false)}>
-            Projects
+          <Link to="/login" onClick={() => setMenuOpen(false)}>
+            login
           </Link>
-          <Link to="/contact" onClick={() => setMenuOpen(false)}>
-            Contact
-          </Link>
+          
         </div>
       </div>
     </nav>

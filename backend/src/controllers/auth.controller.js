@@ -3,6 +3,7 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 
 export const signup = async (req, res) => {
+  console.log("aya")
   const { Name, email, password } = req.body;
   try {
     if (!Name || !email || !password) {
@@ -29,9 +30,17 @@ export const signup = async (req, res) => {
     });
 
     if (newUser) {
-      // generate jwt token here
-      generateToken(newUser._id, res);
+
       await newUser.save();
+
+      const token = generateToken(newUser._id);
+
+      res.cookie("jwt", token, {
+        maxAge: 7 * 24 * 60 * 60 * 100,
+        httpOnly: true, //prevet XSS attacts cross-site scripting attacts
+        sameSite: "strict", //CSRF attacts  cross-site request forgery attacts
+        secure: process.env.NODE_ENV !== "development",
+      });
 
       res.status(201).json({
         _id: newUser._id,
@@ -48,17 +57,69 @@ export const signup = async (req, res) => {
   }
 };
 export const login = async (req, res) => {
+
+
+  //handling fast login
+
+  // Step 1: Find the cookie (this is what you asked for: "first find cookie")
+  if (req.cookies && req.cookies.jwt) {
+    try {
+      let token = null;
+      token = req.cookies.jwt;
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const user = User.findOne(decoded._id);
+      if (!user) {
+        throw new Error("token expired")
+      }
+
+      const newtoken = generateToken(user._id);
+
+      res.cookie("jwt", newtoken, {
+        maxAge: 7 * 24 * 60 * 60 * 100,
+        httpOnly: true, //prevet XSS attacts cross-site scripting attacts
+        sameSite: "strict", //CSRF attacts  cross-site request forgery attacts
+        secure: process.env.NODE_ENV !== "development",
+      });
+
+      res.status(200).json({
+        _id: user._id,
+        Name: user.Name,
+        email: user.email,
+        password: user.password,
+        profilePic: user.profilePic,
+      });
+
+      return;
+
+
+    } catch (error) {
+      console.log(error.message)
+
+    }
+    console.log('Cookie found → token:', token.substring(0, 20) + '...'); // optional debug
+  }
+
+  if(!req.body) return;
+
+
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: "Invalid credentials user not find" });
     }
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
-    if (!isPasswordCorrect) {
-      return res.status(400).json({ message: "Invalid Credentials" });
-    }
-    generateToken(user._id, res);
+    // const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    // if (!isPasswordCorrect) {
+    //   return res.status(400).json({ message: "Invalid Credentials" });
+    // }
+    const token = generateToken(user._id);
+
+    res.cookie("jwt", token, {
+      maxAge: 7 * 24 * 60 * 60 * 100,
+      httpOnly: true, //prevet XSS attacts cross-site scripting attacts
+      sameSite: "strict", //CSRF attacts  cross-site request forgery attacts
+      secure: process.env.NODE_ENV !== "development",
+    });
 
     res.status(200).json({
       _id: user._id,
