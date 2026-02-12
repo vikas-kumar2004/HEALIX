@@ -86,6 +86,16 @@ pip install -r requirements.txt
 ```
 Run the notebook to generate model.pkl and scaler.pkl
 
+## API Run Process
+
+Inside ml folder run the command
+
+```bash
+python server.py
+
+
+```
+
 ## Limitations
 
 - Dataset recorded under controlled conditions
