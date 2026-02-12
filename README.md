@@ -1,4 +1,4 @@
-# 🚀 Project Name
+# 🚀 HEALIX
 
 A high-performance collaborative project developed by a dedicated team of three.
 
@@ -19,4 +19,4 @@ To ensure a smooth collaboration and avoid code conflicts, we follow these stand
 ### 1. Synchronization
 Always fetch the latest updates before starting your session:
 ```bash
-git pull origin main
+git fetch origin main
