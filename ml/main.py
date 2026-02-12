@@ -54,6 +54,8 @@ except ValueError as e:
 
 
 # Predict
+features = features.reshape(1,-1)
+features = scaler.transform(features)
 pred = model.predict(features)
 
 if pred[0] == 0:
