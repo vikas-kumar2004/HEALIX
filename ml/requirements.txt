@@ -1,0 +1,13 @@
+numpy 
+
+pandas 
+
+librosa 
+
+soundfile 
+
+scikit-learn 
+
+matplotlib 
+
+jupyter 
