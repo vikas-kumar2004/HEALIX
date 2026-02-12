@@ -18,7 +18,7 @@ function DashboardPage() {
 
   // ───── States ─────
   const [messages, setMessages] = useState([
-    { role: "ai", content: "Namaste Rajesh ji! Aaj kaise feel kar rahe ho? Koi complaint hai?" },
+    { role: "ai", content: "Namaste Shivam ji! Aaj kaise feel kar rahe ho? Koi complaint hai?" },
   ]);
   const [input, setInput] = useState("");
   const [isRecordingMain, setIsRecordingMain] = useState(false);
@@ -77,9 +77,9 @@ function DashboardPage() {
     }
   };
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  // useEffect(() => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  // }, [messages]);
 
   const sendMessage = () => {
     if (!input.trim()) return;

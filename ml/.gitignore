@@ -1,6 +1,5 @@
 datasets/
-test.wav
-model.pkl
-scaler.pkl
+
+
 __pycache__/
 .ipynb_checkpoints/
