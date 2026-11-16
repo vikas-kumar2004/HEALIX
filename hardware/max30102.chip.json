@@ -1,0 +1,11 @@
+{
+  "name": "max30102",
+  "author": "Shivam Kumar",
+  "pins": [
+    "VCC",
+    "GND",
+    "SDA",
+    "SCL"
+  ],
+  "controls": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "mq7",
+  "author": "Shivam Kumar",
+  "pins": [
+    "VCC",
+    "GND",
+    "AOUT",
+    "HOUT"
+  ],
+  "controls": []
+}

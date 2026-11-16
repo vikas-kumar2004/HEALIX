@@ -1,0 +1,11 @@
+{
+  "name": "sds011",
+  "author": "Shivam Kumar",
+  "pins": [
+    "VCC",
+    "GND",
+    "TX",
+    "RX"
+  ],
+  "controls": []
+}
