@@ -1,0 +1,11 @@
+{
+  "name": "dht22",
+  "author": "Shivam Kumar",
+  "pins": [
+    "VCC",
+    "SDA",
+    "NC",
+    "GND"
+  ],
+  "controls": []
+}
